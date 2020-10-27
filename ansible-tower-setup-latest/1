@@ -1,0 +1,45 @@
+[tower]
+tower1.1ca4.internal
+tower2.1ca4.internal
+tower3.1ca4.internal
+
+[database]
+db2.1ca4.internal
+
+[all:vars]
+ansible_become=true
+admin_password='FbcIMnXjxmiE'
+
+pg_host='db2.1ca4.internal'
+pg_port='5432'
+
+pg_database='awx'
+pg_username='awx'
+pg_password='FbcIMnXjxmiE'
+pg_sslmode='prefer'  # set to 'verify-full' for client-side enforced SSL
+
+# Isolated Tower nodes automatically generate an RSA key for authentication;
+# To disable this behavior, set this value to false
+# isolated_key_generation=true
+
+
+# SSL-related variables
+
+# If set, this will install a custom CA certificate to the system trust store.
+# custom_ca_cert=/path/to/ca.crt
+
+# Certificate and key to install in nginx for the web UI and API
+# web_server_ssl_cert=/path/to/tower.cert
+# web_server_ssl_key=/path/to/tower.key
+
+# Server-side SSL settings for PostgreSQL (when we are installing it).
+# postgres_use_ssl=False
+# postgres_ssl_cert=/path/to/pgsql.crt
+# postgres_ssl_key=/path/to/pgsql.key
+
+# BEGIN ANSIBLE MANAGED BLOCK
+[isolated_group_osp]
+workstation-1467.1467.blue.osp.opentlc.com ansible_user='cloud-user' ansible_ssh_private_key_file='~/.ssh/openstack.pem' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+[isolated_group_osp:vars]
+controller=tower
+# END ANSIBLE MANAGED BLOCK
