@@ -7,6 +7,7 @@
     regexp: '^Defaults\s*requiretty'
     replace: 'Defaults  !requiretty'
     backup: yes
+  tags: base-config
 
 - name: enable repos
   template:
