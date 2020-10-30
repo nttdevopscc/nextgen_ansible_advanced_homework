@@ -1,2 +1,23 @@
 ---
 
+- name: install "{{ payload }}"
+  package:
+    name: "{{ payload }}"
+    state: latest
+
+- name: enable "{{ payload }}" at boot
+  service:
+    name: "{{ payload }}"
+    enabled: yes
+
+- name: create ansible tocat  directory
+  file:
+    path: "{{ tomcat_web_root }}"
+    state: directory
+
+- name: copy static index.html to tomcat_web_root
+  template:
+    src: index.html.j2
+    dest: "{{ tomcat_web_root }}/index.html"
+    mode: 0644
+  notify: "restart tomcat"
