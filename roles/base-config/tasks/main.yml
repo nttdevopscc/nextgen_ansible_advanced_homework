@@ -16,5 +16,11 @@
     mode: 0644
   tags: base-config
  
-# - name: install base tools and packages
-
+- name: install base tools and packages
+  package:
+    name: "{{ item }}" 
+    state: latest
+  with_items:
+    - httpie
+    - python-pip
+  tags: base-config
